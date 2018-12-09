@@ -53,7 +53,7 @@ public class StorageAutoConfiguration {
 
         final SharedKeyCredentials credentials = new SharedKeyCredentials(properties.getAccountName(),
                 properties.getAccountKey());
-        final URL blobUrl = new URL(String.format(BLOB_URL, properties.getAccountName()));
+        final URL blobUrl = properties.isEnableHttps() ? new URL(String.format(BLOB_Https_URL, properties.getAccountName())) : new URL(String.format(BLOB_URL, properties.getAccountName()));
         final PipelineOptions pipelineOptions = buildOptions(options);
         final ServiceURL serviceURL = new ServiceURL(blobUrl, StorageURL.createPipeline(credentials, pipelineOptions));
 
